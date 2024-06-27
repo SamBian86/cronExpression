@@ -1,8 +1,8 @@
 import { getWeekMap } from './week'
 import language from './language'
 // hook
-import useCommonHook from '@/hooks/component/useCommonHook'
-const { cache } = useCommonHook()
+import { useCache } from '@/utils/storage'
+const cache = useCache()
 const lang = cache.getLanguage()
 const default_lang = cache.getDefaultLanguage()
 const _language = language[lang] || language[default_lang]

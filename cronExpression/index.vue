@@ -9,9 +9,9 @@
       >
         <template #append>
           <el-tooltip
-            :effect="layout.el.tooltip.effect"
+            :effect="el.tooltip.effect"
             :content="cronExpressionConfig.language[language].reset"
-            :placement="layout.el.tooltip.placement"
+            :placement="el.tooltip.placement"
           >
             <el-icon class="el-icon-button-svg" @click="resetHandle">
               <i-ep-refresh color="#999" size="12px"></i-ep-refresh>
@@ -57,11 +57,10 @@
 
 <!-- cron表达式组件 -->
 <script setup name="CronExpression">
+import { ElInput, ElTooltip, ElIcon } from 'element-plus'
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 // 配置文件
-import layout from '@/config/layout'
-// hook
-import useCommonHook from '@/hooks/component/useCommonHook'
+import { el } from '@/config/layout'
 // 本地数据
 import cronExpressionConfig from './configs'
 // 目标单位时间选项组件
@@ -74,7 +73,7 @@ import cronExpressionLast from './components/last.vue'
 import cronExpressionAppoint from './components/appoint.vue'
 // hooks
 import useEventHandle from './hooks/useEventHandle'
-
+import store from '@/store'
 const emit = defineEmits(['update:modelValue'])
 const handles = useEventHandle()
 const props = defineProps({
@@ -82,7 +81,6 @@ const props = defineProps({
     type: String
   }
 })
-const { store } = useCommonHook()
 const currentExpression = computed(() => props.modelValue)
 const language = computed(() => store.getters.website_language)
 const components = {
@@ -302,3 +300,6 @@ defineExpose({
   }
 })
 </script>
+<style lang="scss">
+@import '../../../styles/component/cron-expression.scss';
+</style>

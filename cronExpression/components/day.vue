@@ -27,13 +27,13 @@
 
 <!-- cron表达式组件 -->
 <script setup name="cronExpressionDay">
+import { ElCheckbox } from 'element-plus'
 import { ref, computed, onMounted } from 'vue'
-// hook
-import useCommonHook from '@/hooks/component/useCommonHook'
 // 本地数据
 import cronExpressionConfig from '../configs'
+import store from '@/store'
 const emit = defineEmits(['handle'])
-const { store } = useCommonHook()
+
 const language = computed(() => store.getters.website_language)
 // 本地数据
 const props = defineProps({
